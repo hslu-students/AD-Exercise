@@ -60,7 +60,7 @@ public class App
     	// Solve P vs NP Problem
     	task1Calls += 1;
     	try {
-			Thread.sleep(5);
+			Thread.sleep(1);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -71,7 +71,7 @@ public class App
     	// Calculate PI to the last possible digit
     	task2Calls += 1;
     	try {
-			Thread.sleep(5);
+			Thread.sleep(1);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -82,7 +82,7 @@ public class App
     	// Satisfyingly work with Java
     	task3Calls += 1;
     	try {
-			Thread.sleep(5);
+			Thread.sleep(1);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

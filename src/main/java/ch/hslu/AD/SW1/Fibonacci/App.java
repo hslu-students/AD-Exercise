@@ -32,9 +32,9 @@ public class App
     	if (memoizedFib.containsKey(n)) {
     		return memoizedFib.get(n);
   	   	}
-  	   		
     	
-    	int tmp = fiboRec2(n - 1) + fiboRec2(n - 2);
+    	// Rekursionsvorschrift
+    	int tmp = fiboRec2(n - 1) + fiboRec2(n - 2); 
   	   	memoizedFib.put(n, tmp);
   	   	return tmp;
     }

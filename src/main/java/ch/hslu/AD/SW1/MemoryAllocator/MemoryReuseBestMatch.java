@@ -56,7 +56,7 @@ public class MemoryReuseBestMatch implements Memory {
 			previousBlock = currentBlock;
 		}
 		
-		// if no matching gap was found but there are registered blocks, return the next ajacent address.
+		// if no matching gap was found but there are registered blocks, return the next adjacent address.
 		if(bestError == Integer.MAX_VALUE && previousBlock != null) {
 			bestStartAddress = previousBlock.getAddress() + previousBlock.getSize();
 		}
