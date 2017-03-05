@@ -130,10 +130,8 @@ public class RingBufferQueue<ElementType> implements Collection<ElementType> {
 	@Override
 	public String toString() {
 		StringBuilder str = new StringBuilder("| ");
-		Iterator<ElementType> it = new RingBufferQueueIterator();
 		//int index = 0;
-		while(it.hasNext()) {
-			ElementType element = it.next();
+		for(ElementType element : this) {
 			if(element == null) {
 				str.append(' ');
 			} else {
