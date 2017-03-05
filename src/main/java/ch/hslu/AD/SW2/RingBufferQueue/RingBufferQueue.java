@@ -7,8 +7,8 @@ import java.util.Iterator;
 
 public class RingBufferQueue<ElementType> implements Collection<ElementType> {
 	private int size = 0;
-	private int readPos = 0;
-	private int writePos = 0;
+	private int readPos = 0; // tail
+	private int writePos = 0; // head
 	private int usedSize = 0;
 	private ElementType[] buffer;
 	
