@@ -152,7 +152,6 @@ public class RingBufferQueueTest {
 	
 	@Test
 	public void testContains() {
-
     	RingBufferQueue<Character> queue = new RingBufferQueue<>(10);
     	queue.write('J');
     	queue.write('O');
@@ -161,5 +160,43 @@ public class RingBufferQueueTest {
     	
     	assertFalse(queue.contains('A'));
     	assertTrue(queue.contains('O'));
+	}
+	
+	@Test
+	public void testUsedSize() {
+    	RingBufferQueue<Character> queue = new RingBufferQueue<>(4);
+    	assertEquals(0, queue.used());
+    	queue.write('J');
+    	assertEquals(1, queue.used());
+    	queue.write('O');
+    	assertEquals(2, queue.used());
+    	queue.write('H');
+    	assertEquals(3, queue.used());
+    	queue.write('N');
+    	assertEquals(4, queue.used());
+    	queue.read();
+    	assertEquals(3, queue.used());
+    	queue.read();
+    	assertEquals(2, queue.used());
+    	queue.write('S');
+    	assertEquals(3, queue.used());
+    	queue.write('N');
+    	assertEquals(4, queue.used());
+    	queue.read();
+    	assertEquals(3, queue.used());
+    	queue.read();
+    	assertEquals(2, queue.used());
+    	queue.write('O');
+    	assertEquals(3, queue.used());
+    	queue.write('W');
+    	assertEquals(4, queue.used());
+    	queue.read();
+    	assertEquals(3, queue.used());
+    	queue.read();
+    	assertEquals(2, queue.used());
+    	queue.read();
+    	assertEquals(1, queue.used());
+    	queue.read();
+    	assertEquals(0, queue.used());
 	}
 }
