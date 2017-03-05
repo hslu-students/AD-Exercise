@@ -77,14 +77,12 @@ public class SinglyLinkedList<ElementType>  implements List<ElementType> {
 
 	@Override
 	public boolean contains(Object o) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public boolean containsAll(Collection<?> c) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException();
 	}
 	
 	private Node<ElementType> getNode(int index) {
@@ -112,8 +110,7 @@ public class SinglyLinkedList<ElementType>  implements List<ElementType> {
 
 	@Override
 	public int indexOf(Object o) {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -128,20 +125,17 @@ public class SinglyLinkedList<ElementType>  implements List<ElementType> {
 
 	@Override
 	public int lastIndexOf(Object o) {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public ListIterator<ElementType> listIterator() {
-		// TODO Auto-generated method stub
-		return null;
+		return new SinglyLinkedListListIterator(null, head, 0, 0);
 	}
 
 	@Override
 	public ListIterator<ElementType> listIterator(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -183,38 +177,37 @@ public class SinglyLinkedList<ElementType>  implements List<ElementType> {
 
 	@Override
 	public boolean removeAll(Collection<?> c) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public boolean retainAll(Collection<?> c) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public ElementType set(int index, ElementType element) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public List<ElementType> subList(int fromIndex, int toIndex) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Object[] toArray() {
-		// TODO Auto-generated method stub
-		return null;
+		Object[] o = new Object[size];
+		int currentIndex = 0;
+		for(ElementType element : this) {
+			o[currentIndex++] = element;
+		}
+		return o;
 	}
 
 	@Override
 	public <T> T[] toArray(T[] a) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 	
 	private class SinglyLinkedListIterator implements Iterator<ElementType> {
@@ -241,5 +234,84 @@ public class SinglyLinkedList<ElementType>  implements List<ElementType> {
 			current = current.next();
 			return current.getElement();
 		}
+	}
+	
+	private class SinglyLinkedListListIterator implements ListIterator<ElementType> {
+		
+		private Node<ElementType> previous;
+		private Node<ElementType> current;
+		private int previousIndex = 0;
+		private int currentIndex = 0;
+		
+		public SinglyLinkedListListIterator(Node<ElementType> previous, Node<ElementType> current, int previousIndex, int currentIndex) {
+			this.previous = previous;
+			this.current = current;
+			this.previousIndex = previousIndex;
+			this.currentIndex = currentIndex;
+		}
+		
+		@Override
+		public void add(ElementType arg0) {
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		public boolean hasNext() {
+			return current.hasNext();
+		}
+
+		@Override
+		public boolean hasPrevious() {
+			return previous != null;
+		}
+
+		@Override
+		public ElementType next() {
+			if(!hasNext()) {
+				throw new NoSuchElementException();
+			}
+			
+			previous = current;
+			previousIndex = currentIndex++;
+			current = current.next();
+			return current.getElement();
+		}
+
+		@Override
+		public int nextIndex() {
+			if(!hasNext()) {
+				throw new NoSuchElementException();
+			}
+			
+			return currentIndex + 1;
+		}
+
+		@Override
+		public ElementType previous() {
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		public int previousIndex() {
+			if(!hasPrevious()) {
+				throw new NoSuchElementException();
+			}
+			
+			return previousIndex;
+		}
+
+		@Override
+		public void remove() {
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		public void set(ElementType arg0) {
+			Node<ElementType> node = new Node<>(arg0);
+			node.link(current.next());
+			previous.link(node);
+			current = node;
+		}
+		
 	}
 }

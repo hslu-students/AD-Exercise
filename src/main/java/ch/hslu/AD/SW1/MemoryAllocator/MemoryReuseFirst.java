@@ -1,6 +1,9 @@
 package ch.hslu.AD.SW1.MemoryAllocator;
 
 import java.util.List;
+
+import ch.hslu.AD.SW2.SinglyLinkedList.SinglyLinkedList;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -8,7 +11,8 @@ import java.util.Iterator;
 public class MemoryReuseFirst implements Memory {
 	private int size;
 	
-	private List<Allocation> blocks = new ArrayList<Allocation>();
+	//private List<Allocation> blocks = new ArrayList<>();
+	private List<Allocation> blocks = new SinglyLinkedList<>();
 	
 	public MemoryReuseFirst(int size) {
 		this.size = size;
