@@ -54,9 +54,9 @@ public class SinglyLinkedListTest
     	Iterator<Integer> it = list.iterator();
     	
     	assertEquals(true, it.hasNext());
-    	assertEquals(new Integer(1), it.next());
-    	assertEquals(true, it.hasNext());
     	assertEquals(new Integer(2), it.next());
+    	assertEquals(true, it.hasNext());
+    	assertEquals(new Integer(1), it.next());
     	assertEquals(false, it.hasNext());
     }
     
@@ -66,22 +66,22 @@ public class SinglyLinkedListTest
     	list.add(2);
     	list.add(3);
     	Iterator<Integer> it = list.iterator();
-    	assertEquals(new Integer(1), it.next());
-    	assertEquals(new Integer(2), it.next());
     	assertEquals(new Integer(3), it.next());
+    	assertEquals(new Integer(2), it.next());
+    	assertEquals(new Integer(1), it.next());
     	list.add(1, 4);
     	it = list.iterator();
-    	assertEquals(new Integer(1), it.next());
+    	assertEquals(new Integer(3), it.next());
     	assertEquals(new Integer(4), it.next());
     	assertEquals(new Integer(2), it.next());
-    	assertEquals(new Integer(3), it.next());
+    	assertEquals(new Integer(1), it.next());
     	list.add(2, 5);
     	it = list.iterator();
-    	assertEquals(new Integer(1), it.next());
+    	assertEquals(new Integer(3), it.next());
     	assertEquals(new Integer(4), it.next());
     	assertEquals(new Integer(5), it.next());
     	assertEquals(new Integer(2), it.next());
-    	assertEquals(new Integer(3), it.next());
+    	assertEquals(new Integer(1), it.next());
     }
     
     public void testAddingCollection() {
@@ -130,10 +130,10 @@ public class SinglyLinkedListTest
     	list.add(3);
     	list.add(4);
     	
-    	assertEquals(new Integer(1), list.get(0));
-    	assertEquals(new Integer(2), list.get(1));
-    	assertEquals(new Integer(3), list.get(2));
-    	assertEquals(new Integer(4), list.get(3));
+    	assertEquals(new Integer(4), list.get(0));
+    	assertEquals(new Integer(3), list.get(1));
+    	assertEquals(new Integer(2), list.get(2));
+    	assertEquals(new Integer(1), list.get(3));
     }
     
     public void testRemoveElement() {
@@ -146,15 +146,15 @@ public class SinglyLinkedListTest
     	list.remove(new Integer(2));
     	assertEquals(3, list.size());
     	Iterator<Integer> it = list.iterator();
-    	assertEquals(new Integer(1), it.next());
-    	assertEquals(new Integer(3), it.next());
     	assertEquals(new Integer(4), it.next());
+    	assertEquals(new Integer(3), it.next());
+    	assertEquals(new Integer(1), it.next());
     	
     	list.remove(new Integer(1));
     	assertEquals(2, list.size());
     	it = list.iterator();
-    	assertEquals(new Integer(3), it.next());
     	assertEquals(new Integer(4), it.next());
+    	assertEquals(new Integer(3), it.next());
     }
     
     public void testRemoveNonExistingElement() {
@@ -170,12 +170,12 @@ public class SinglyLinkedListTest
     
     public void testRemoveElementAtIndex() {
     	SinglyLinkedList<Integer> list = new SinglyLinkedList<>();
-    	list.add(1);
-    	list.add(2);
-    	list.add(3);
-    	list.add(4);
-    	list.add(5);
     	list.add(6);
+    	list.add(5);
+    	list.add(4);
+    	list.add(3);
+    	list.add(2);
+    	list.add(1);
     	
     	assertEquals(new Integer(2), list.remove(1));
     	assertEquals(5, list.size());

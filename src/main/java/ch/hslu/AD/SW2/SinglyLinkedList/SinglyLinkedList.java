@@ -20,7 +20,7 @@ public class SinglyLinkedList<ElementType>  implements List<ElementType> {
 
 	@Override
 	public boolean add(ElementType element) {
-		add(size(), element);
+		add(0, element);
 		return true;
 	}
 
