@@ -14,7 +14,7 @@ public class RingBufferQueue<T> implements Collection<T> {
 	public RingBufferQueue(int size) {
 		// See http://stackoverflow.com/a/530289/1336014
 		@SuppressWarnings("unchecked")
-		final T[] buffer = (T[]) new Object[size];
+		final T[] buffer = (T[]) new Object[size]; // c'mon java ... wtf
 		this.buffer = buffer;
 	}
 	

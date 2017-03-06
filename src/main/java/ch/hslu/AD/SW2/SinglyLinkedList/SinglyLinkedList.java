@@ -8,10 +8,10 @@ import java.util.NoSuchElementException;
 
 public class SinglyLinkedList<T>  implements List<T> {
 	private int size = 0;
-	private Node<T> head;
+	private Node head;
 	
 	public SinglyLinkedList() {
-		head = new Node<>(null);
+		head = new Node(null);
 	}
 	
 	public int size() {
@@ -27,14 +27,14 @@ public class SinglyLinkedList<T>  implements List<T> {
 	@Override
 	public void add(int index, T element) {
 		int currentIndex = 0;
-		Node<T> currentNode = head;
+		Node currentNode = head;
 		
 		while(currentNode.hasNext() && currentIndex < index) {
 			currentNode = currentNode.next();
 			currentIndex++;
 		}
 		
-		Node<T> node = new Node<>(element);
+		Node node = new Node(element);
 		node.link(currentNode.next());
 		currentNode.link(node);
 		size++;
@@ -70,13 +70,13 @@ public class SinglyLinkedList<T>  implements List<T> {
 		throw new UnsupportedOperationException();
 	}
 	
-	private Node<T> getNode(int index) {
+	private Node getNode(int index) {
 		if(index < 0 || index >= size()) {
 			return null;
 		}
 		
 		int currentIndex = 0;
-		Node<T> current = head;
+		Node current = head;
 		while(currentIndex < index && current.hasNext()) {
 			current = current.next();
 			currentIndex++;
@@ -86,7 +86,7 @@ public class SinglyLinkedList<T>  implements List<T> {
 
 	@Override
 	public T get(int index) {
-		Node<T> node = getNode(index);
+		Node node = getNode(index);
 		if(node == null) {
 			throw new IndexOutOfBoundsException(String.format("Index: %d, Size: %d", index, size()));
 		}
@@ -125,8 +125,8 @@ public class SinglyLinkedList<T>  implements List<T> {
 
 	@Override
 	public boolean remove(Object o) {
-		Node<T> currentNode = head;
-		Node<T> previousNode = head;
+		Node currentNode = head;
+		Node previousNode = head;
 		
 		while(currentNode.hasNext()) {
 			currentNode = currentNode.next();
@@ -146,8 +146,8 @@ public class SinglyLinkedList<T>  implements List<T> {
 			throw new IndexOutOfBoundsException(String.format("Index: %d, Size: %d", index, size()));
 		}
 		
-		Node<T> currentNode = head;
-		Node<T> previousNode = head;
+		Node currentNode = head;
+		Node previousNode = head;
 		int currentIndex = 0;
 		while(currentNode.hasNext() && currentIndex <= index) {
 			previousNode = currentNode;
@@ -195,12 +195,35 @@ public class SinglyLinkedList<T>  implements List<T> {
 		throw new UnsupportedOperationException();
 	}
 	
-	private class SinglyLinkedListIterator implements Iterator<T> {
-
-		private Node<T> previous;
-		private Node<T> current;
+	private class Node {
+		private T element;
+		private Node next;
 		
-		public SinglyLinkedListIterator(Node<T> current) {
+		public Node(T element) {
+			this.element = element;
+		}
+		
+		public T getElement() {
+			return element;
+		}
+		
+		public void link(Node next) {
+			this.next = next;
+		}
+		
+		public boolean hasNext() {
+			return next != null;
+		}
+		
+		public Node next() {
+			return next;
+		}
+	}
+	
+	private class SinglyLinkedListIterator implements Iterator<T> {
+		private Node current;
+		
+		public SinglyLinkedListIterator(Node current) {
 			this.current = current;
 		}
 		
@@ -215,7 +238,6 @@ public class SinglyLinkedList<T>  implements List<T> {
 				throw new NoSuchElementException();
 			}
 			
-			previous = current;
 			current = current.next();
 			return current.getElement();
 		}
@@ -223,12 +245,12 @@ public class SinglyLinkedList<T>  implements List<T> {
 	
 	private class SinglyLinkedListListIterator implements ListIterator<T> {
 		
-		private Node<T> previous;
-		private Node<T> current;
+		private Node previous;
+		private Node current;
 		private int previousIndex = 0;
 		private int currentIndex = 0;
 		
-		public SinglyLinkedListListIterator(Node<T> previous, Node<T> current, int previousIndex, int currentIndex) {
+		public SinglyLinkedListListIterator(Node previous, Node current, int previousIndex, int currentIndex) {
 			this.previous = previous;
 			this.current = current;
 			this.previousIndex = previousIndex;
@@ -292,7 +314,7 @@ public class SinglyLinkedList<T>  implements List<T> {
 
 		@Override
 		public void set(T arg0) {
-			Node<T> node = new Node<>(arg0);
+			Node node = new Node(arg0);
 			node.link(current.next());
 			previous.link(node);
 			current = node;

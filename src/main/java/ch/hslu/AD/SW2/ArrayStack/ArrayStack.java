@@ -11,7 +11,7 @@ public class ArrayStack<T> implements Stack<T> {
 	public ArrayStack(int size) {
 		// See http://stackoverflow.com/a/530289/1336014
 		@SuppressWarnings("unchecked")
-		final T[] stack = (T[]) new Object[size];
+		final T[] stack = (T[]) new Object[size]; // c'mon java ... wtf
 		this.stack = stack;
 	}
 	
@@ -38,10 +38,12 @@ public class ArrayStack<T> implements Stack<T> {
 	
 	public T pop() {
 		if(isEmpty()) {
-			throw new NoSuchElementException("Stack is empty");
+			throw new NoSuchElementException("Stack is empty"); // uncool ... there is no point in unchecked exceptions ;)
 		}
 
-		return stack[--index]; // it's not really necessary to actually remove the element from the stack.
+		T element = stack[--index];
+		stack[index] = null; // remove element from stack to allow GC to delete object
+		return element;
 	}
 	
 	public T peek() {
