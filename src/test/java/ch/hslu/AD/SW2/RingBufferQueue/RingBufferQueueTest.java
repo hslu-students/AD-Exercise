@@ -33,15 +33,15 @@ public class RingBufferQueueTest {
 	@Test
 	public void testWritingElements() {
     	RingBufferQueue<Character> queue = new RingBufferQueue<>(9);
-    	queue.write('J');
-    	queue.write('A');
-    	queue.write('V');
-    	queue.write('A');
-    	queue.write('S');
-    	queue.write('U');
-    	queue.write('C');
-    	queue.write('K');
-    	queue.write('S');
+    	queue.enqueue('J');
+    	queue.enqueue('A');
+    	queue.enqueue('V');
+    	queue.enqueue('A');
+    	queue.enqueue('S');
+    	queue.enqueue('U');
+    	queue.enqueue('C');
+    	queue.enqueue('K');
+    	queue.enqueue('S');
     	
     	assertEquals(9, queue.used());
     	assertTrue(queue.isFull());
@@ -50,39 +50,39 @@ public class RingBufferQueueTest {
 	@Test
 	public void testReadingElements() {
     	RingBufferQueue<Character> queue = new RingBufferQueue<>(9);
-    	queue.write('J');
-    	queue.write('A');
-    	queue.write('V');
-    	queue.write('A');
-    	queue.write('S');
-    	queue.write('U');
-    	queue.write('C');
-    	queue.write('K');
-    	queue.write('S');
+    	queue.enqueue('J');
+    	queue.enqueue('A');
+    	queue.enqueue('V');
+    	queue.enqueue('A');
+    	queue.enqueue('S');
+    	queue.enqueue('U');
+    	queue.enqueue('C');
+    	queue.enqueue('K');
+    	queue.enqueue('S');
     	
-    	assertEquals(new Character('J'), queue.read());
-    	assertEquals(new Character('A'), queue.read());
-    	assertEquals(new Character('V'), queue.read());
-    	assertEquals(new Character('A'), queue.read());
-    	assertEquals(new Character('S'), queue.read());
-    	assertEquals(new Character('U'), queue.read());
-    	assertEquals(new Character('C'), queue.read());
-    	assertEquals(new Character('K'), queue.read());
-    	assertEquals(new Character('S'), queue.read());
+    	assertEquals(new Character('J'), queue.dequeue());
+    	assertEquals(new Character('A'), queue.dequeue());
+    	assertEquals(new Character('V'), queue.dequeue());
+    	assertEquals(new Character('A'), queue.dequeue());
+    	assertEquals(new Character('S'), queue.dequeue());
+    	assertEquals(new Character('U'), queue.dequeue());
+    	assertEquals(new Character('C'), queue.dequeue());
+    	assertEquals(new Character('K'), queue.dequeue());
+    	assertEquals(new Character('S'), queue.dequeue());
 	}
 	
 	@Test
 	public void testStringRepr() {
     	RingBufferQueue<Character> queue = new RingBufferQueue<>(9);
-    	queue.write('J');
-    	queue.write('A');
-    	queue.write('V');
-    	queue.write('A');
-    	queue.write('S');
-    	queue.write('U');
-    	queue.write('C');
-    	queue.write('K');
-    	queue.write('S');
+    	queue.enqueue('J');
+    	queue.enqueue('A');
+    	queue.enqueue('V');
+    	queue.enqueue('A');
+    	queue.enqueue('S');
+    	queue.enqueue('U');
+    	queue.enqueue('C');
+    	queue.enqueue('K');
+    	queue.enqueue('S');
     	
     	assertEquals("| J | A | V | A | S | U | C | K | S |", queue.toString().trim());
 	}
@@ -90,13 +90,13 @@ public class RingBufferQueueTest {
 	@Test
 	public void testOveflow() {
     	RingBufferQueue<Character> queue = new RingBufferQueue<>(4);
-    	queue.write('J');
-    	queue.write('A');
-    	queue.write('V');
-    	queue.write('A');
+    	queue.enqueue('J');
+    	queue.enqueue('A');
+    	queue.enqueue('V');
+    	queue.enqueue('A');
     	
     	exception.expect(BufferOverflowException.class);
-    	queue.write('S');
+    	queue.enqueue('S');
 	}
 	
 	@Test
@@ -104,48 +104,48 @@ public class RingBufferQueueTest {
     	RingBufferQueue<Character> queue = new RingBufferQueue<>(4);
 
     	exception.expect(BufferUnderflowException.class);
-    	queue.read();
+    	queue.dequeue();
 	}
 	
 	@Test
 	public void testUnderflow2() {
     	RingBufferQueue<Character> queue = new RingBufferQueue<>(4);
-    	queue.write('J');
-    	queue.write('O');
-    	queue.write('H');
-    	queue.read();
-    	queue.read();
-    	queue.read();
+    	queue.enqueue('J');
+    	queue.enqueue('O');
+    	queue.enqueue('H');
+    	queue.dequeue();
+    	queue.dequeue();
+    	queue.dequeue();
 
     	exception.expect(BufferUnderflowException.class);
-    	queue.read();
+    	queue.dequeue();
 	}
 	
 	@Test
 	public void testReuse() {
     	RingBufferQueue<Character> queue = new RingBufferQueue<>(4);
-    	queue.write('J');
-    	queue.write('O');
-    	queue.write('H');
-    	queue.write('N');
+    	queue.enqueue('J');
+    	queue.enqueue('O');
+    	queue.enqueue('H');
+    	queue.enqueue('N');
     	
-    	assertEquals(new Character('J'), queue.read());
-    	queue.write('S');
+    	assertEquals(new Character('J'), queue.dequeue());
+    	queue.enqueue('S');
     	assertEquals("| S | O | H | N |", queue.toString().trim());
     	
-    	assertEquals(new Character('O'), queue.read());
-    	assertEquals(new Character('H'), queue.read());
-    	assertEquals(new Character('N'), queue.read());
+    	assertEquals(new Character('O'), queue.dequeue());
+    	assertEquals(new Character('H'), queue.dequeue());
+    	assertEquals(new Character('N'), queue.dequeue());
     	
-    	queue.write('N');
-    	queue.write('O');
-    	queue.write('W');
+    	queue.enqueue('N');
+    	queue.enqueue('O');
+    	queue.enqueue('W');
     	assertEquals("| S | N | O | W |", queue.toString().trim());
     	
-    	assertEquals(new Character('S'), queue.read());
-    	assertEquals(new Character('N'), queue.read());
-    	assertEquals(new Character('O'), queue.read());
-    	assertEquals(new Character('W'), queue.read());
+    	assertEquals(new Character('S'), queue.dequeue());
+    	assertEquals(new Character('N'), queue.dequeue());
+    	assertEquals(new Character('O'), queue.dequeue());
+    	assertEquals(new Character('W'), queue.dequeue());
     	
     	assertTrue(queue.isEmpty());
 	}
@@ -153,10 +153,10 @@ public class RingBufferQueueTest {
 	@Test
 	public void testContains() {
     	RingBufferQueue<Character> queue = new RingBufferQueue<>(10);
-    	queue.write('J');
-    	queue.write('O');
-    	queue.write('H');
-    	queue.write('N');
+    	queue.enqueue('J');
+    	queue.enqueue('O');
+    	queue.enqueue('H');
+    	queue.enqueue('N');
     	
     	assertFalse(queue.contains('A'));
     	assertTrue(queue.contains('O'));
@@ -166,37 +166,37 @@ public class RingBufferQueueTest {
 	public void testUsedSize() {
     	RingBufferQueue<Character> queue = new RingBufferQueue<>(4);
     	assertEquals(0, queue.used());
-    	queue.write('J');
+    	queue.enqueue('J');
     	assertEquals(1, queue.used());
-    	queue.write('O');
+    	queue.enqueue('O');
     	assertEquals(2, queue.used());
-    	queue.write('H');
+    	queue.enqueue('H');
     	assertEquals(3, queue.used());
-    	queue.write('N');
+    	queue.enqueue('N');
     	assertEquals(4, queue.used());
-    	queue.read();
+    	queue.dequeue();
     	assertEquals(3, queue.used());
-    	queue.read();
+    	queue.dequeue();
     	assertEquals(2, queue.used());
-    	queue.write('S');
+    	queue.enqueue('S');
     	assertEquals(3, queue.used());
-    	queue.write('N');
+    	queue.enqueue('N');
     	assertEquals(4, queue.used());
-    	queue.read();
+    	queue.dequeue();
     	assertEquals(3, queue.used());
-    	queue.read();
+    	queue.dequeue();
     	assertEquals(2, queue.used());
-    	queue.write('O');
+    	queue.enqueue('O');
     	assertEquals(3, queue.used());
-    	queue.write('W');
+    	queue.enqueue('W');
     	assertEquals(4, queue.used());
-    	queue.read();
+    	queue.dequeue();
     	assertEquals(3, queue.used());
-    	queue.read();
+    	queue.dequeue();
     	assertEquals(2, queue.used());
-    	queue.read();
+    	queue.dequeue();
     	assertEquals(1, queue.used());
-    	queue.read();
+    	queue.dequeue();
     	assertEquals(0, queue.used());
 	}
 }

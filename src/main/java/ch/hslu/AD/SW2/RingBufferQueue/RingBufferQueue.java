@@ -36,11 +36,11 @@ public class RingBufferQueue<ElementType> implements Collection<ElementType> {
 
 	@Override
 	public boolean add(ElementType arg0) {
-		return write(arg0);
+		return enqueue(arg0);
 	}
 	
-	public boolean write(ElementType element) {
-		if(usedSize >= buffer.length) { // buffer is full -> we do not overwrite.
+	public boolean enqueue(ElementType element) {
+		if(isFull()) { // buffer is full -> we do not overwrite.
 			throw new BufferOverflowException();
 		}
 		
@@ -50,7 +50,7 @@ public class RingBufferQueue<ElementType> implements Collection<ElementType> {
 		return true;
 	}
 	
-	public ElementType read() {
+	public ElementType dequeue() {
 		if(isEmpty()) { // buffer is empty -> we cannot read.
 			throw new BufferUnderflowException();
 		}
