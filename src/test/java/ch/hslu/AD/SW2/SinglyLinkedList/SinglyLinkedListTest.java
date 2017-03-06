@@ -94,21 +94,21 @@ public class SinglyLinkedListTest
     	list.addAll(boringList);
     	assertEquals(3, list.size());
     	Iterator<Integer> it = list.iterator();
-    	assertEquals(new Integer(1), it.next());
-    	assertEquals(new Integer(2), it.next());
     	assertEquals(new Integer(3), it.next());
+    	assertEquals(new Integer(2), it.next());
+    	assertEquals(new Integer(1), it.next());
     	assertEquals(false, it.hasNext());
     	
     	list.addAll(boringList);
 
     	assertEquals(6, list.size());
     	it = list.iterator();
-    	assertEquals(new Integer(1), it.next());
-    	assertEquals(new Integer(2), it.next());
     	assertEquals(new Integer(3), it.next());
-    	assertEquals(new Integer(1), it.next());
     	assertEquals(new Integer(2), it.next());
+    	assertEquals(new Integer(1), it.next());
     	assertEquals(new Integer(3), it.next());
+    	assertEquals(new Integer(2), it.next());
+    	assertEquals(new Integer(1), it.next());
     	assertEquals(false, it.hasNext());
     }
     

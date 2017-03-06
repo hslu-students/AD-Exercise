@@ -5,16 +5,16 @@ import java.nio.BufferUnderflowException;
 import java.util.Collection;
 import java.util.Iterator;
 
-public class RingBufferQueue<ElementType> implements Collection<ElementType> {
+public class RingBufferQueue<T> implements Collection<T> {
 	private int readPos = 0; // tail
 	private int writePos = 0; // head
 	private int usedSize = 0;
-	private ElementType[] buffer;
+	private T[] buffer;
 	
 	public RingBufferQueue(int size) {
 		// See http://stackoverflow.com/a/530289/1336014
 		@SuppressWarnings("unchecked")
-		final ElementType[] buffer = (ElementType[]) new Object[size];
+		final T[] buffer = (T[]) new Object[size];
 		this.buffer = buffer;
 	}
 	
@@ -35,11 +35,11 @@ public class RingBufferQueue<ElementType> implements Collection<ElementType> {
 	}
 
 	@Override
-	public boolean add(ElementType arg0) {
+	public boolean add(T arg0) {
 		return enqueue(arg0);
 	}
 	
-	public boolean enqueue(ElementType element) {
+	public boolean enqueue(T element) {
 		if(isFull()) { // buffer is full -> we do not overwrite.
 			throw new BufferOverflowException();
 		}
@@ -50,12 +50,12 @@ public class RingBufferQueue<ElementType> implements Collection<ElementType> {
 		return true;
 	}
 	
-	public ElementType dequeue() {
+	public T dequeue() {
 		if(isEmpty()) { // buffer is empty -> we cannot read.
 			throw new BufferUnderflowException();
 		}
 		
-		ElementType element = buffer[readPos];
+		T element = buffer[readPos];
 		buffer[readPos] = null;
 		usedSize--;
 		readPos = (readPos + 1) % buffer.length;
@@ -63,7 +63,7 @@ public class RingBufferQueue<ElementType> implements Collection<ElementType> {
 	}
 
 	@Override
-	public boolean addAll(Collection<? extends ElementType> arg0) {
+	public boolean addAll(Collection<? extends T> arg0) {
 		return false;
 	}
 
@@ -79,7 +79,7 @@ public class RingBufferQueue<ElementType> implements Collection<ElementType> {
 
 	@Override
 	public boolean contains(Object arg0) {
-		for(ElementType element : this) {
+		for(T element : this) {
 			if(element != null && element.equals(arg0)) {
 				return true;
 			}
@@ -94,7 +94,7 @@ public class RingBufferQueue<ElementType> implements Collection<ElementType> {
 	}
 
 	@Override
-	public Iterator<ElementType> iterator() {
+	public Iterator<T> iterator() {
 		return new RingBufferQueueIterator();
 	}
 
@@ -128,7 +128,7 @@ public class RingBufferQueue<ElementType> implements Collection<ElementType> {
 	public String toString() {
 		StringBuilder str = new StringBuilder("| ");
 		//int index = 0;
-		for(ElementType element : this) {
+		for(T element : this) {
 			if(element == null) {
 				str.append(' ');
 			} else {
@@ -149,7 +149,7 @@ public class RingBufferQueue<ElementType> implements Collection<ElementType> {
 		return str.toString();
 	}
 	
-	private class RingBufferQueueIterator implements Iterator<ElementType> {
+	private class RingBufferQueueIterator implements Iterator<T> {
 		private int readPos = 0;
 		@Override
 		public boolean hasNext() {
@@ -157,7 +157,7 @@ public class RingBufferQueue<ElementType> implements Collection<ElementType> {
 		}
 
 		@Override
-		public ElementType next() {
+		public T next() {
 			return buffer[readPos++];
 		}
 		

@@ -4,14 +4,14 @@ import java.util.NoSuchElementException;
 
 import ch.hslu.AD.SW2.ArrayStack.StackFullException;
 
-public class ArrayStack<ElementType> implements Stack<ElementType> {
+public class ArrayStack<T> implements Stack<T> {
 	private int index = 0;
-	private ElementType[] stack;
+	private T[] stack;
 	
 	public ArrayStack(int size) {
 		// See http://stackoverflow.com/a/530289/1336014
 		@SuppressWarnings("unchecked")
-		final ElementType[] stack = (ElementType[]) new Object[size];
+		final T[] stack = (T[]) new Object[size];
 		this.stack = stack;
 	}
 	
@@ -27,7 +27,7 @@ public class ArrayStack<ElementType> implements Stack<ElementType> {
 		return stack.length;
 	}
 
-	public boolean push(ElementType element) throws StackFullException {
+	public boolean push(T element) throws StackFullException {
 		if(isFull()) {
 			throw new StackFullException(stack.length);
 		}
@@ -36,7 +36,7 @@ public class ArrayStack<ElementType> implements Stack<ElementType> {
 		return true;
 	}
 	
-	public ElementType pop() {
+	public T pop() {
 		if(isEmpty()) {
 			throw new NoSuchElementException("Stack is empty");
 		}
@@ -44,7 +44,7 @@ public class ArrayStack<ElementType> implements Stack<ElementType> {
 		return stack[--index]; // it's not really necessary to actually remove the element from the stack.
 	}
 	
-	public ElementType peek() {
+	public T peek() {
 		if(isEmpty()) {
 			return null;
 		}

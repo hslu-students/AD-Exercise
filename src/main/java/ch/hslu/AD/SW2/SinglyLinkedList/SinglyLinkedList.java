@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
-public class SinglyLinkedList<ElementType>  implements List<ElementType> {
+public class SinglyLinkedList<T>  implements List<T> {
 	private int size = 0;
-	private Node<ElementType> head;
+	private Node<T> head;
 	
 	public SinglyLinkedList() {
 		head = new Node<>(null);
@@ -19,53 +19,38 @@ public class SinglyLinkedList<ElementType>  implements List<ElementType> {
 	}
 
 	@Override
-	public boolean add(ElementType element) {
+	public boolean add(T element) {
 		add(0, element);
 		return true;
 	}
 
 	@Override
-	public void add(int index, ElementType element) {
+	public void add(int index, T element) {
 		int currentIndex = 0;
-		Node<ElementType> currentNode = head;
+		Node<T> currentNode = head;
 		
 		while(currentNode.hasNext() && currentIndex < index) {
 			currentNode = currentNode.next();
 			currentIndex++;
 		}
 		
-		Node<ElementType> node = new Node<>(element);
+		Node<T> node = new Node<>(element);
 		node.link(currentNode.next());
 		currentNode.link(node);
 		size++;
 	}
-	
-	private Node<ElementType> lastNode() {
-		if(head == null) {
-			return null;
-		}
-		
-		Node<ElementType> currentNode = head;
-		while(currentNode.hasNext()) {
-			currentNode = currentNode.next();
-		}
-		return currentNode;
-	}
 
 	@Override
-	public boolean addAll(Collection<? extends ElementType> c) {
-		Node<ElementType> leftNode = lastNode();
-		for(ElementType element : c) {
-			Node<ElementType> node = new Node<>(element);
-			leftNode.link(node);
-			leftNode = node;
-			size++;
+	public boolean addAll(Collection<? extends T> c) {
+		for(T element : c) {
+			add(element);
 		}
+		
 		return true;
 	}
 
 	@Override
-	public boolean addAll(int index, Collection<? extends ElementType> c) {
+	public boolean addAll(int index, Collection<? extends T> c) {
 		return false;
 	}
 
@@ -85,13 +70,13 @@ public class SinglyLinkedList<ElementType>  implements List<ElementType> {
 		throw new UnsupportedOperationException();
 	}
 	
-	private Node<ElementType> getNode(int index) {
+	private Node<T> getNode(int index) {
 		if(index < 0 || index >= size()) {
 			return null;
 		}
 		
 		int currentIndex = 0;
-		Node<ElementType> current = head;
+		Node<T> current = head;
 		while(currentIndex < index && current.hasNext()) {
 			current = current.next();
 			currentIndex++;
@@ -100,8 +85,8 @@ public class SinglyLinkedList<ElementType>  implements List<ElementType> {
 	}
 
 	@Override
-	public ElementType get(int index) {
-		Node<ElementType> node = getNode(index);
+	public T get(int index) {
+		Node<T> node = getNode(index);
 		if(node == null) {
 			throw new IndexOutOfBoundsException(String.format("Index: %d, Size: %d", index, size()));
 		}
@@ -119,7 +104,7 @@ public class SinglyLinkedList<ElementType>  implements List<ElementType> {
 	}
 
 	@Override
-	public Iterator<ElementType> iterator() {
+	public Iterator<T> iterator() {
 		return new SinglyLinkedListIterator(head);
 	}
 
@@ -129,19 +114,19 @@ public class SinglyLinkedList<ElementType>  implements List<ElementType> {
 	}
 
 	@Override
-	public ListIterator<ElementType> listIterator() {
+	public ListIterator<T> listIterator() {
 		return new SinglyLinkedListListIterator(null, head, 0, 0);
 	}
 
 	@Override
-	public ListIterator<ElementType> listIterator(int index) {
+	public ListIterator<T> listIterator(int index) {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public boolean remove(Object o) {
-		Node<ElementType> currentNode = head;
-		Node<ElementType> previousNode = head;
+		Node<T> currentNode = head;
+		Node<T> previousNode = head;
 		
 		while(currentNode.hasNext()) {
 			currentNode = currentNode.next();
@@ -156,20 +141,20 @@ public class SinglyLinkedList<ElementType>  implements List<ElementType> {
 	}
 
 	@Override
-	public ElementType remove(int index) {
+	public T remove(int index) {
 		if(index < 0 || index >= size()) {
 			throw new IndexOutOfBoundsException(String.format("Index: %d, Size: %d", index, size()));
 		}
 		
-		Node<ElementType> currentNode = head;
-		Node<ElementType> previousNode = head;
+		Node<T> currentNode = head;
+		Node<T> previousNode = head;
 		int currentIndex = 0;
 		while(currentNode.hasNext() && currentIndex <= index) {
 			previousNode = currentNode;
 			currentNode = currentNode.next();
 			currentIndex++;
 		}
-		ElementType element = currentNode.getElement();
+		T element = currentNode.getElement();
 		previousNode.link(currentNode.next());
 		size--;
 		return element;
@@ -186,12 +171,12 @@ public class SinglyLinkedList<ElementType>  implements List<ElementType> {
 	}
 
 	@Override
-	public ElementType set(int index, ElementType element) {
+	public T set(int index, T element) {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public List<ElementType> subList(int fromIndex, int toIndex) {
+	public List<T> subList(int fromIndex, int toIndex) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -199,7 +184,7 @@ public class SinglyLinkedList<ElementType>  implements List<ElementType> {
 	public Object[] toArray() {
 		Object[] o = new Object[size];
 		int currentIndex = 0;
-		for(ElementType element : this) {
+		for(T element : this) {
 			o[currentIndex++] = element;
 		}
 		return o;
@@ -210,12 +195,12 @@ public class SinglyLinkedList<ElementType>  implements List<ElementType> {
 		throw new UnsupportedOperationException();
 	}
 	
-	private class SinglyLinkedListIterator implements Iterator<ElementType> {
+	private class SinglyLinkedListIterator implements Iterator<T> {
 
-		private Node<ElementType> previous;
-		private Node<ElementType> current;
+		private Node<T> previous;
+		private Node<T> current;
 		
-		public SinglyLinkedListIterator(Node<ElementType> current) {
+		public SinglyLinkedListIterator(Node<T> current) {
 			this.current = current;
 		}
 		
@@ -225,7 +210,7 @@ public class SinglyLinkedList<ElementType>  implements List<ElementType> {
 		}
 
 		@Override
-		public ElementType next() {
+		public T next() {
 			if(!hasNext()) {
 				throw new NoSuchElementException();
 			}
@@ -236,14 +221,14 @@ public class SinglyLinkedList<ElementType>  implements List<ElementType> {
 		}
 	}
 	
-	private class SinglyLinkedListListIterator implements ListIterator<ElementType> {
+	private class SinglyLinkedListListIterator implements ListIterator<T> {
 		
-		private Node<ElementType> previous;
-		private Node<ElementType> current;
+		private Node<T> previous;
+		private Node<T> current;
 		private int previousIndex = 0;
 		private int currentIndex = 0;
 		
-		public SinglyLinkedListListIterator(Node<ElementType> previous, Node<ElementType> current, int previousIndex, int currentIndex) {
+		public SinglyLinkedListListIterator(Node<T> previous, Node<T> current, int previousIndex, int currentIndex) {
 			this.previous = previous;
 			this.current = current;
 			this.previousIndex = previousIndex;
@@ -251,7 +236,7 @@ public class SinglyLinkedList<ElementType>  implements List<ElementType> {
 		}
 		
 		@Override
-		public void add(ElementType arg0) {
+		public void add(T arg0) {
 			throw new UnsupportedOperationException();
 		}
 
@@ -266,7 +251,7 @@ public class SinglyLinkedList<ElementType>  implements List<ElementType> {
 		}
 
 		@Override
-		public ElementType next() {
+		public T next() {
 			if(!hasNext()) {
 				throw new NoSuchElementException();
 			}
@@ -287,7 +272,7 @@ public class SinglyLinkedList<ElementType>  implements List<ElementType> {
 		}
 
 		@Override
-		public ElementType previous() {
+		public T previous() {
 			throw new UnsupportedOperationException();
 		}
 
@@ -306,8 +291,8 @@ public class SinglyLinkedList<ElementType>  implements List<ElementType> {
 		}
 
 		@Override
-		public void set(ElementType arg0) {
-			Node<ElementType> node = new Node<>(arg0);
+		public void set(T arg0) {
+			Node<T> node = new Node<>(arg0);
 			node.link(current.next());
 			previous.link(node);
 			current = node;
