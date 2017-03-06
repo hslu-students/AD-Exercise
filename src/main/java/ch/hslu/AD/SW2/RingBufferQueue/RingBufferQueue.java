@@ -6,15 +6,12 @@ import java.util.Collection;
 import java.util.Iterator;
 
 public class RingBufferQueue<ElementType> implements Collection<ElementType> {
-	private int size = 0;
 	private int readPos = 0; // tail
 	private int writePos = 0; // head
 	private int usedSize = 0;
 	private ElementType[] buffer;
 	
 	public RingBufferQueue(int size) {
-		this.size = size;
-		
 		// See http://stackoverflow.com/a/530289/1336014
 		@SuppressWarnings("unchecked")
 		final ElementType[] buffer = (ElementType[]) new Object[size];
@@ -26,11 +23,11 @@ public class RingBufferQueue<ElementType> implements Collection<ElementType> {
 	}
 	
 	public boolean isFull() {
-		return usedSize == size;
+		return usedSize == buffer.length;
 	}
 	
 	public int size() {
-		return this.size;
+		return buffer.length;
 	}
 	
 	public int used() {
@@ -43,12 +40,12 @@ public class RingBufferQueue<ElementType> implements Collection<ElementType> {
 	}
 	
 	public boolean write(ElementType element) {
-		if(usedSize >= size) { // buffer is full -> we do not overwrite.
+		if(usedSize >= buffer.length) { // buffer is full -> we do not overwrite.
 			throw new BufferOverflowException();
 		}
 		
 		buffer[writePos] = element;
-		writePos = (writePos + 1) % size;
+		writePos = (writePos + 1) % buffer.length;
 		usedSize++;
 		return true;
 	}
@@ -61,7 +58,7 @@ public class RingBufferQueue<ElementType> implements Collection<ElementType> {
 		ElementType element = buffer[readPos];
 		buffer[readPos] = null;
 		usedSize--;
-		readPos = (readPos + 1) % size;
+		readPos = (readPos + 1) % buffer.length;
 		return element;
 	}
 
@@ -156,7 +153,7 @@ public class RingBufferQueue<ElementType> implements Collection<ElementType> {
 		private int readPos = 0;
 		@Override
 		public boolean hasNext() {
-			return readPos < size;
+			return readPos < buffer.length;
 		}
 
 		@Override

@@ -5,13 +5,10 @@ import java.util.NoSuchElementException;
 import ch.hslu.AD.SW2.ArrayStack.StackFullException;
 
 public class ArrayStack<ElementType> implements Stack<ElementType> {
-	private int size = 0;
 	private int index = 0;
 	private ElementType[] stack;
 	
 	public ArrayStack(int size) {
-		this.size = size;
-		
 		// See http://stackoverflow.com/a/530289/1336014
 		@SuppressWarnings("unchecked")
 		final ElementType[] stack = (ElementType[]) new Object[size];
@@ -23,16 +20,16 @@ public class ArrayStack<ElementType> implements Stack<ElementType> {
 	}
 	
 	public boolean isFull() {
-		return index == size;
+		return index == stack.length;
 	}
 	
 	public int size() {
-		return this.size;
+		return stack.length;
 	}
 
 	public boolean push(ElementType element) throws StackFullException {
 		if(isFull()) {
-			throw new StackFullException(size);
+			throw new StackFullException(stack.length);
 		}
 		
 		stack[index++] = element;
