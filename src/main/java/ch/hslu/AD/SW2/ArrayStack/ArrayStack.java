@@ -4,7 +4,7 @@ import java.util.NoSuchElementException;
 
 import ch.hslu.AD.SW2.ArrayStack.StackFullException;
 
-public class ArrayStack<ElementType> {
+public class ArrayStack<ElementType> implements Stack<ElementType> {
 	private int size = 0;
 	private int index = 0;
 	private ElementType[] stack;
