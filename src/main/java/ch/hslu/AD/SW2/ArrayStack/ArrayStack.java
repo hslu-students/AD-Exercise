@@ -7,12 +7,11 @@ import ch.hslu.AD.SW2.ArrayStack.StackFullException;
 public class ArrayStack<T> implements Stack<T> {
 	private int index = 0;
 	private T[] stack;
-	
+
+	@SuppressWarnings("unchecked")
 	public ArrayStack(int size) {
 		// See http://stackoverflow.com/a/530289/1336014
-		@SuppressWarnings("unchecked")
-		final T[] stack = (T[]) new Object[size]; // c'mon java ... wtf
-		this.stack = stack;
+		this.stack = (T[]) new Object[size]; // c'mon java ... wtf
 	}
 	
 	public boolean isEmpty() {

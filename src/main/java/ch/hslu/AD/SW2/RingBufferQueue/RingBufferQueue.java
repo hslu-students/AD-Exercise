@@ -11,11 +11,10 @@ public class RingBufferQueue<T> implements Collection<T> {
 	private int usedSize = 0;
 	private T[] buffer;
 	
+	@SuppressWarnings("unchecked")
 	public RingBufferQueue(int size) {
 		// See http://stackoverflow.com/a/530289/1336014
-		@SuppressWarnings("unchecked")
-		final T[] buffer = (T[]) new Object[size]; // c'mon java ... wtf
-		this.buffer = buffer;
+		this.buffer = (T[]) new Object[size]; // c'mon java ... wtf
 	}
 	
 	public boolean isEmpty() {
