@@ -1,6 +1,7 @@
 package ch.hslu.AD.SW3.BinaryTree;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -223,6 +224,43 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
 	}
 	
 	/**
+	 * Balance the tree.
+	 */
+	public void balance() {
+		if(root == null) {
+			return; // empty tree, thus we do nothing.
+		}
+		
+		List<T> elements = root.toList();
+		// sort elements
+		Collections.sort(elements);
+		
+		root = balance(elements, null);
+	}
+	
+	private Node balance(List<T> elements, Node parent) {
+		if(elements.isEmpty()) {
+			return null; // we are at the end
+		}
+		
+		// get middle node
+		int middleIndex = elements.size() / 2;
+		Node node = new Node(elements.get(middleIndex), parent);
+		
+		node.left = balance(elements.subList(0, middleIndex), node);
+		node.right = balance(elements.subList(middleIndex + 1, elements.size()), node);
+		
+		return node;
+	}
+	
+	public List<T> toList() {
+		if(root == null) {
+			return new ArrayList<T>();
+		}
+		return root.toList();
+	}
+	
+	/**
 	 * Return the maximum order of the tree.
 	 * 
 	 * Because this is a binary search tree the order
@@ -385,6 +423,25 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
 			int rightWeight = (right != null) ? right.getWeight() : 0;
 			
 			return leftWeight + rightWeight + 1; // we add one because a leaf has weight 1.
+		}
+		
+		/**
+		 * Return a list of all elements in this tree in pre-order.
+		 * @return
+		 */
+		public List<T> toList() {
+			List<T> list = new ArrayList<>();
+			list.add(element);
+			
+			if(left != null) {
+				list.addAll(left.toList());
+			}
+			
+			if(right != null) {
+				list.addAll(right.toList());
+			}
+			
+			return list;
 		}
 	}
 }
