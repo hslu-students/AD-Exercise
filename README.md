@@ -3,7 +3,7 @@ HSLU Algorithmen & Datenstrukturen Module Exercises
 
 ## Content
 
-This repository only contains the solutions for the exercises where an 
+This repository only contains the solutions for the exercises where an
 implementation was required or where one was appropriate.
 
 Solved exercises:
@@ -19,3 +19,5 @@ Solved exercises:
   * 3. *Implementation eines Stacks mit Hilfe eines Array*, [ch.hslu.AD.SW2.ArrayStack](src/main/java/ch/hslu/AD/SW2/ArrayStack/ArrayStack.java)
   * 4. *Implementation einer Queue mit Array als Ringbuffer*, [ch.hslu.AD.SW2.RingBufferQueue](src/main/java/ch/hslu/AD/SW2/RingBufferQueue/RingBufferQueue.java)
   * 5. *Optional: Speicherverwaltung mit eigener List*, See alternative implementation at: [ch.hslu.AD.SW1.MemoryAllocator](src/main/java/ch/hslu/AD/SW1/MemoryAllocator)
+* SW 3, [Exercise on ILIAS](https://elearning.hslu.ch/ilias/goto.php?target=file_3311023_download)
+  * 5. *Implementation eines binaeren Suchbaumes*, [ch.hslu.AD.SW3.BinaryTree.BinarySearchTree](src/main/java/ch/hslu/AD/SW3/BinaryTree/BinarySearchTree.java)
