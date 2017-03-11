@@ -13,37 +13,13 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
 	
 	private Node root;
 	
-	public int getOrder() {
-		return TREE_ORDER; 
-	};
-	
-	public int getDegree(T element) {
-		Node node = contains(root, element);
-		if(node == null) {
-			throw new NoSuchElementException();
-		}
-		
-		return node.getDegree();
-	}
-	
-	public List<T> getPath(T element) {
-		Node node = contains(root, element);
-		if(node == null) {
-			throw new NoSuchElementException();
-		}
-		
-		return node.getPath();
-	}
-	
-	public int getDepth(T element) {
-		Node node = contains(root, element);
-		if(node == null) {
-			throw new NoSuchElementException();
-		}
-		
-		return node.getDepth();
-	}
-	
+	/**
+	 * Add the given element to the tree.
+	 * 
+	 * @param element the element to add to the tree.
+	 * 
+	 * @return if the element could be added.
+	 */
 	public boolean add(T element) {
 		if(element == null) {
 			throw new NullPointerException("Failed to create Node with 'null' element");
@@ -58,6 +34,15 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
 		return insert(root, element);
 	}
 	
+	/**
+	 * Insert the given element in the correct order into the given root node.
+	 * 
+	 * The tree is traversed in a pre-order fashion.
+	 * 
+	 * @param root the root node of the (sub)tree
+	 * @param element the element to insert
+	 * @return
+	 */
 	private boolean insert(Node root, T element) {
 		if(root == null) {
 			// we are forced to abort because we cannot insert here
@@ -93,6 +78,13 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
 		return false;
 	}
 	
+	/**
+	 * Remove the given element from the tree
+	 * 
+	 * @param element the element to remove from the tree
+	 * 
+	 * @throws NoSuchElementException
+	 */
 	public boolean remove(T element) {
 		try {
 			root = remove(root, element);
@@ -103,6 +95,17 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
 		return true;
 	}
 	
+	/**
+	 * Remove the given element from the given root node.
+	 * 
+	 * The tree is traversed in a post-order fashion.
+	 * 
+	 * @param root the root node of the (sub)tree.
+	 * @param element the element to remove.
+	 * @return the Node which is the new root node.
+	 * 
+	 * @throws NoSuchElementException
+	 */
 	private Node remove(Node root, T element) {
 		if(root == null) {
 			// we probably have an empty tree or messed up insertion
@@ -153,6 +156,14 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
 		return root;
 	}
 	
+	/**
+	 * Get the left and bottom most node of a given (sub)tree.
+	 * 
+	 * This method is used to remove a node with two children.
+	 * 
+	 * @param root the root element of the (sub)tree.
+	 * @return the left and bottom most node.
+	 */
 	private Node getLeftMost(Node root) {
 		if(root.left == null) {
 			return root;
@@ -161,10 +172,25 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
 		return getLeftMost(root.left);
 	}
 	
+	/**
+	 * Return whether the given element is a node in the tree.
+	 * 
+	 * @param element the element to search for
+	 * @return if the element is a node of the tree.
+	 */
 	public boolean contains(T element) {
 		return contains(root, element) != null;
 	}
 	
+	/**
+	 * Return whether the given (sub)tree contains the given element.
+	 * 
+	 * The tree is traversed in a pre-order fashion.
+	 * 
+	 * @param root the root node of the (sub)tree.
+	 * @param element the element to search for.
+	 * @return the found node.
+	 */
 	private Node contains(Node root, T element) {
 		if(root == null) {
 			// we probably have an empty tree or messed up insertion
@@ -194,6 +220,103 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
 		
 		// FIXME(TF): we messed the the insertion up
 		return null;
+	}
+	
+	/**
+	 * Return the maximum order of the tree.
+	 * 
+	 * Because this is a binary search tree the order
+	 * is always 2.
+	 */
+	public int getOrder() {
+		return TREE_ORDER; 
+	};
+	
+	/**
+	 * Get the degree of the given element in this tree.
+	 */
+	public int getDegree(T element) {
+		Node node = contains(root, element);
+		if(node == null) {
+			throw new NoSuchElementException();
+		}
+		
+		return node.getDegree();
+	}
+	
+	/**
+	 * Get the path to the given element in this tree.
+	 */
+	public List<T> getPath(T element) {
+		Node node = contains(root, element);
+		if(node == null) {
+			throw new NoSuchElementException();
+		}
+		
+		return node.getPath();
+	}
+	
+	/**
+	 * Get the depth of the given element in this tree.
+	 */
+	public int getDepth(T element) {
+		Node node = contains(root, element);
+		if(node == null) {
+			throw new NoSuchElementException();
+		}
+		
+		return node.getDepth();
+	}
+	
+	/**
+	 * Get the height of this tree.
+	 */
+	public int getHeight() {
+		if(root == null) {
+			return 0;
+		}
+		
+		return root.getHeight();
+	}
+	
+	/**
+	 * Get the height of the given element in this tree.
+	 * 
+	 * @param element the element for the height.
+	 * @return the height of the given element.
+	 */
+	public int getHeight(T element) {
+		Node node = contains(root, element);
+		if(node == null) {
+			throw new NoSuchElementException();
+		}
+		
+		return node.getHeight();
+	}
+	
+	/**
+	 * Get the weight of this tree.
+	 */
+	public int getWeight() {
+		if(root == null) {
+			return 0;
+		}
+		
+		return root.getWeight();
+	}
+	
+	/**
+	 * Get the weight of the given element in this tree.
+	 * @param element the weight of the given element.
+	 * @return
+	 */
+	public int getWeight(T element) {
+		Node node = contains(root, element);
+		if(node == null) {
+			throw new NoSuchElementException();
+		}
+		
+		return node.getWeight();
 	}
 	
 	private class Node {
@@ -248,6 +371,20 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
 				current = current.parent;
 			}
 			return depth;
+		}
+		
+		public int getHeight() {
+			int leftHeight = (left != null) ? left.getHeight() : 0;
+			int rightHeight = (right != null) ? right.getHeight() : 0;
+			
+			return Math.max(leftHeight, rightHeight) + 1; // we add one because a leaf has height 1.
+		}
+		
+		public int getWeight() {
+			int leftWeight = (left != null) ? left.getWeight() : 0;
+			int rightWeight = (right != null) ? right.getWeight() : 0;
+			
+			return leftWeight + rightWeight + 1; // we add one because a leaf has weight 1.
 		}
 	}
 }

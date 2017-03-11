@@ -76,6 +76,7 @@ public interface Tree<T extends Comparable<T>> {
 	 * @return the tree's height
 	 */
 	public int getHeight();
+	public int getHeight(T element);
 	
 	/**
 	 * Returns the weight of the tree.
@@ -86,4 +87,5 @@ public interface Tree<T extends Comparable<T>> {
 	 * @return the tree's weight
 	 */
 	public int getWeight();
+	public int getWeight(T element);
 }

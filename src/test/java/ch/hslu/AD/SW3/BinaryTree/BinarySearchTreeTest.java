@@ -244,4 +244,56 @@ public class BinarySearchTreeTest {
 		assertEquals(4, tree.getDepth(9));
 		assertEquals(4, tree.getDepth(11));
 	}
+	
+	@Test
+	public void testHeight() {
+		BinarySearchTree<Integer> tree = new BinarySearchTree<>();
+		tree.add(5);
+		tree.add(4);
+		tree.add(10);
+		tree.add(8);
+		tree.add(12);
+		tree.add(7);
+		tree.add(9);
+		tree.add(11);
+		tree.add(13);
+		tree.add(14);
+		tree.add(15);
+		
+		// height of entire tree (root node)
+		assertEquals(6, tree.getHeight());
+		
+		// height of arbitrary node
+		assertEquals(5, tree.getHeight(10));
+		assertEquals(2, tree.getHeight(8));
+		assertEquals(3, tree.getHeight(13));
+		assertEquals(1, tree.getHeight(15));
+		assertEquals(1, tree.getHeight(4));
+	}
+	
+	@Test
+	public void testWeight() {
+		BinarySearchTree<Integer> tree = new BinarySearchTree<>();
+		tree.add(5);
+		tree.add(4);
+		tree.add(10);
+		tree.add(8);
+		tree.add(12);
+		tree.add(7);
+		tree.add(9);
+		tree.add(11);
+		tree.add(13);
+		tree.add(14);
+		tree.add(15);
+		
+		// weight of entire tree (root node)
+		assertEquals(11, tree.getWeight());
+		
+		// weight of arbitrary node
+		assertEquals(9, tree.getWeight(10));
+		assertEquals(3, tree.getWeight(8));
+		assertEquals(3, tree.getWeight(13));
+		assertEquals(1, tree.getWeight(15));
+		assertEquals(1, tree.getWeight(4));
+	}
 }
