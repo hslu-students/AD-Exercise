@@ -394,20 +394,20 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
 			List<T> path = new ArrayList<>();
 			
 			Node current = this;
-			while(current != null) {
+			do {
 				path.add(0, current.getElement());
 				current = current.parent;
-			}
+			} while(current != null);
 			return path;
 		}
 		
 		public int getDepth() {
 			int depth = 0;
 			Node current = this;
-			while(current != null) {
+			do {
 				depth++;
 				current = current.parent;
-			}
+			} while(current != null);
 			return depth;
 		}
 		
