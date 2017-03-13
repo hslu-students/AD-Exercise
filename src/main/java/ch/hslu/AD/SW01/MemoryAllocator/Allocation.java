@@ -2,7 +2,7 @@ package ch.hslu.AD.SW01.MemoryAllocator;
 
 import java.util.Objects;
 
-public final class Allocation {
+public final class Allocation implements Comparable<Allocation> {
 	final private int startAddress;
 	final private int size;
 	
@@ -40,5 +40,15 @@ public final class Allocation {
 	
 	public String toString() {
 		return String.format("Block[Address:%d; Size:%d]", startAddress, size);
+	}
+
+	@Override
+	public int compareTo(Allocation arg0) {
+		if(this.getAddress() < arg0.getAddress()) {
+			return -1;
+		} else if(this.getAddress() > arg0.getAddress()) {
+			return 1;
+		}
+		return 0;
 	}
 }
