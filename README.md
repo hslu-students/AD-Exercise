@@ -21,3 +21,4 @@ Solved exercises:
   * 5. *Optional: Speicherverwaltung mit eigener List*, See alternative implementation at: [ch.hslu.AD.SW01.MemoryAllocator](src/main/java/ch/hslu/AD/SW01/MemoryAllocator)
 * SW 3, [Exercise on ILIAS](https://elearning.hslu.ch/ilias/goto.php?target=file_3311023_download)
   * 5. *Implementation eines binaeren Suchbaumes*, [ch.hslu.AD.SW03.BinaryTree.BinarySearchTree](src/main/java/ch/hslu/AD/SW03/BinaryTree/BinarySearchTree.java)
+  * 6. *Binärer Suchbaum mit Hashcode als Schlüssel*, [ch.hslu.AD.SW03.BinaryTree.HashedBinarySearchTree](src/main/java/ch/hslu/AD/SW03/BinaryTree/HashedBinarySearchTree.java)
