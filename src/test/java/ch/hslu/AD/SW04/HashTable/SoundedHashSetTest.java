@@ -60,6 +60,8 @@ public class SoundedHashSetTest {
     	assertTrue(set.add(1));
     	assertTrue(set.add(2));
     	assertTrue(set.add(1));
+    	
+    	assertEquals(3, set.size());
     }
 	
 	@Test

@@ -11,6 +11,7 @@ public class SoundedHashSet<T> implements Iterable<T> {
 	private static int DEFAULT_ARRAY_SIZE = 42;
 	
 	private Node[] items;
+	private int size = 0;
 	
 	public SoundedHashSet() {
 		this(DEFAULT_ARRAY_SIZE);
@@ -39,8 +40,13 @@ public class SoundedHashSet<T> implements Iterable<T> {
 		return currentIndex;
 	}
 	
+	public int size() {
+		return size;
+	}
+	
 	public boolean add(T item) {
 		items[getNextIndex(item)] = new Node(item);
+		size++;
 		return true;
 	}
 	
@@ -71,6 +77,7 @@ public class SoundedHashSet<T> implements Iterable<T> {
 		}
 		
 		node.bury();
+		size--;
 		return true;
 	}
 	
