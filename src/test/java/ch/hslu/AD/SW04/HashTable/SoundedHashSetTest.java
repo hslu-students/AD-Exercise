@@ -180,6 +180,5 @@ public class SoundedHashSetTest {
 		assertTrue(it.hasNext());
 		assertEquals(soundedItem, it.next());
 		assertFalse(it.hasNext());
-		
 	}
 }
