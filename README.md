@@ -22,3 +22,7 @@ Solved exercises:
 * SW 3, [Exercise on ILIAS](https://elearning.hslu.ch/ilias/goto.php?target=file_3311023_download)
   * 5. *Implementation eines binaeren Suchbaumes*, [ch.hslu.AD.SW03.BinaryTree.BinarySearchTree](src/main/java/ch/hslu/AD/SW03/BinaryTree/BinarySearchTree.java)
   * 6. *Binärer Suchbaum mit Hashcode als Schlüssel*, [ch.hslu.AD.SW03.BinaryTree.HashedBinarySearchTree](src/main/java/ch/hslu/AD/SW03/BinaryTree/HashedBinarySearchTree.java)
+* SW 4, [Exercise on ILIAS](https://elearning.hslu.ch/ilias/goto.php?target=file_3319689_download)
+  * 1. *Einfache Hashtabelle*, [ch.hslu.AD.SW04.HashTable.DumbHashSet](src/main/java/ch/hslu/AD/SW04/HashTable/DumbHashSet.java)
+  * 2. *Hashtabelle mit Kollisionen*, [ch.hslu.AD.SW04.HashTable.SoundedHashSet](src/main/java/ch/hslu/AD/SW04/HashTable/SoundedHashSet.java)
+  * 3. *Hashtabelle mit Buckets*, [ch.hslu.AD.SW04.HashTable.BucketHashSet](src/main/java/ch/hslu/AD/SW04/HashTable/BucketHashSet.java)

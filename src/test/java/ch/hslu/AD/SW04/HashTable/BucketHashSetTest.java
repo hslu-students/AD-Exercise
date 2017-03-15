@@ -59,7 +59,7 @@ public class BucketHashSetTest {
     	BucketHashSet<Integer> set = new BucketHashSet<>();
     	assertTrue(set.add(1));
     	assertTrue(set.add(2));
-    	assertTrue(set.add(1));
+    	assertTrue(set.add(3));
     	
     	assertEquals(3, set.size());
     }

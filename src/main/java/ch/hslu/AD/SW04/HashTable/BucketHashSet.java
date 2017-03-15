@@ -1,8 +1,11 @@
 package ch.hslu.AD.SW04.HashTable;
 
 import java.lang.reflect.Array;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.Set;
 
-public class BucketHashSet<T> {
+public class BucketHashSet<T> implements Set<T> {
 	private static int DEFAULT_ARRAY_SIZE = 42;
 	
 	private Node[] items;
@@ -11,22 +14,33 @@ public class BucketHashSet<T> {
 	public BucketHashSet() {
 		this(DEFAULT_ARRAY_SIZE);
 	}
-	
+
 	public BucketHashSet(int size) {
-		@SuppressWarnings("unchecked")
-		Node[] items = Node[].class.cast(Array.newInstance(Node.class, size));
-		this.items = items;
+		this.initialize(size);
+	}
+
+	@SuppressWarnings("unchecked")
+	final public void initialize(int size) {
+		this.items = Node[].class.cast(Array.newInstance(Node.class, size));
+		this.size = 0;
 	}
 	
-	public int size() {
+	final public void clear() {
+		this.initialize(items.length);
+	}
+	
+	final public int size() {
 		return size;
 	}
 	
-	public boolean add(T item) {
+	final public boolean add(T item) {
 		int index = item.hashCode() % items.length;
-		
-		// get node at desired index
 		Node node = items[index];
+		
+		if(containsInBucket(node, item)) {
+			return true;
+		}
+		
 		Node newNode = new Node(item);
 		
 		if(node != null) {
@@ -37,9 +51,15 @@ public class BucketHashSet<T> {
 		return true;
 	}
 	
-	public boolean contains(T item) {
+	final public boolean contains(Object item) {
 		int index = item.hashCode() % items.length;
 		Node node = items[index];
+		
+		return containsInBucket(node, item);
+	}
+	
+	final public boolean containsInBucket(Node head, Object item) {
+		Node node = head;
 		
 		while(node != null) {
 			if(node.getElement().equals(item)) {
@@ -51,7 +71,7 @@ public class BucketHashSet<T> {
 		return false;
 	}
 	
-	public boolean remove(T item) {
+	final public boolean remove(Object item) {
 		int index = item.hashCode() % items.length;
 		Node prevNode = null;
 		Node node = items[index];
@@ -73,7 +93,7 @@ public class BucketHashSet<T> {
 		return false;
 	}
 	
-	private class Node {
+	final private class Node {
 		private T element;
 		private Node next;
 		
@@ -92,5 +112,53 @@ public class BucketHashSet<T> {
 		public Node next() {
 			return next;
 		}
+	}
+
+	@Override
+	public boolean addAll(Collection<? extends T> c) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public boolean containsAll(Collection<?> c) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public boolean isEmpty() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Iterator<T> iterator() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public boolean removeAll(Collection<?> c) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public boolean retainAll(Collection<?> c) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Object[] toArray() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public <T> T[] toArray(T[] a) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
