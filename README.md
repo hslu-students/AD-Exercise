@@ -5,6 +5,7 @@ HSLU Algorithmen & Datenstrukturen Module Exercises
 
 This repository only contains the solutions for the exercises where an
 implementation was required or where one was appropriate.
+No guarantee for correctness.
 
 Solved exercises:
 
