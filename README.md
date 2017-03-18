@@ -27,3 +27,5 @@ Solved exercises:
   * 1. *Einfache Hashtabelle*, [ch.hslu.AD.SW04.HashTable.DumbHashSet](src/main/java/ch/hslu/AD/SW04/HashTable/DumbHashSet.java)
   * 2. *Hashtabelle mit Kollisionen*, [ch.hslu.AD.SW04.HashTable.SoundedHashSet](src/main/java/ch/hslu/AD/SW04/HashTable/SoundedHashSet.java)
   * 3. *Hashtabelle mit Buckets*, [ch.hslu.AD.SW04.HashTable.BucketHashSet](src/main/java/ch/hslu/AD/SW04/HashTable/BucketHashSet.java)
+  * 4. *Einfache Performance-Messung und Analyse*, [ch.hslu.AD.SW04.HashTable.SimpleHashSetPerf](src/main/java/ch/hslu/AD/SW04/HashTable/SimpleHashSetPerf.java)
+  * 5. *Performance-Vergleich: Stack-Implementationen*, [ch.hslu.AD.SW04.HashTable.SimpleStackPerf](src/main/java/ch/hslu/AD/SW04/HashTable/SimpleStackPerf.java)
