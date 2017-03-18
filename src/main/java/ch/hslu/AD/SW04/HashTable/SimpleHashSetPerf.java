@@ -4,11 +4,12 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-public class SimplePerfHashSet {
+public class SimpleHashSetPerf {
 
 	final private static int MAX_PERF_CYCLES = 10; 
 	final private static int MAX_ITEM_SAMPLES = 100000;
 	final private static int MAX_SET_SIZE = 100;
+	//final private static int MAX_SET_SIZE = MAX_ITEM_SAMPLES;
 	
 	private static Item[] getItems(int amount) {
 		Item[] items = new Item[amount];
@@ -22,6 +23,7 @@ public class SimplePerfHashSet {
 
 	public static void main(String[] args) {
 		doPerfMeasurement(new BucketHashSet<Item>(MAX_SET_SIZE), MAX_PERF_CYCLES, MAX_ITEM_SAMPLES);
+		// NOTE(TF): not possible to use for more than MAX_SET_SIZE item samples because of eventual internal array overflow.
 		//doPerfMeasurement(new SoundedHashSet<Item>(MAX_SET_SIZE), MAX_PERF_CYCLES, MAX_ITEM_SAMPLES);
 		doPerfMeasurement(new HashSet<Item>(MAX_SET_SIZE), MAX_PERF_CYCLES, MAX_ITEM_SAMPLES);
 	}
