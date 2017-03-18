@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
-public class SoundedHashSet<T> implements Iterable<T>, Set<T> {
+public class SoundedHashSet<T> implements Set<T> {
 	private static int DEFAULT_ARRAY_SIZE = 42;
 	
 	private Node[] items;
