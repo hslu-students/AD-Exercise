@@ -15,12 +15,20 @@ public class BankAccount {
 		return this.balance;
 	}
 	
-	public void deposite(final int amount) {
+	public synchronized void deposite(final int amount) {
 		this.balance += amount;
 	}
 	
 	public void transfer(final BankAccount target, final int amount) {
-		this.balance -= amount;
+		//System.out.println(String.format("Transfer %d from %s to %s", amount, this, target));
+		synchronized (this) {
+			this.balance -= amount;
+		}
 		target.deposite(amount);
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("BankAccount [balance: %d]", this.balance);
 	}
 }

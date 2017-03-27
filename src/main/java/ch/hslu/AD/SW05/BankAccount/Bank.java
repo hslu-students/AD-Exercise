@@ -19,9 +19,8 @@ public class Bank {
 		}
 	}
 	
-	public void startTransfers(final int maxThreads, final int amount) {
-		Thread[] forthTransferThreads = new Thread[maxThreads * sourceAccounts.size()];
-		Thread[] backTransferThreads = new Thread[maxThreads * targetAccounts.size()];
+	public void startTransfers(final int maxThreads, final int amount) throws InterruptedException {
+		List<Thread> threads = new ArrayList<Thread>();
 		
 		final int transferAmount = amount / maxThreads;
 		
@@ -31,19 +30,35 @@ public class Bank {
 			BankAccount targetAccount = targetAccounts.get(i);
 			
 			for(int j = 0; j < maxThreads; j++) {
-				forthTransferThreads[i * sourceAccounts.size() + j] = new Thread(() -> sourceAccount.transfer(targetAccount, transferAmount));
-				backTransferThreads[i * sourceAccounts.size() + j] = new Thread(() -> targetAccount.transfer(sourceAccount, transferAmount));
+				threads.add(new Thread(() -> sourceAccount.transfer(targetAccount, transferAmount)));
+				threads.add(new Thread(() -> targetAccount.transfer(sourceAccount, transferAmount)));
 			}
 		}
 		
-		// one list of threads
-		for(Thread thread : forthTransferThreads) {
-			thread.start();
+		//Collections.shuffle(threads);
+		
+		threads.stream().forEach((t) -> t.start());
+		threads.stream().forEach((t) -> {
+			try {
+				t.join();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		});
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		
+		for(BankAccount account : this.sourceAccounts) {
+			builder.append(account + "\n");
+		}
+		for(BankAccount account : this.targetAccounts) {
+			builder.append(account + "\n");
 		}
 		
-		// join all threads
-		for(Thread thread : forthTransferThreads) {
-			thread.join();
-		}
+		return builder.toString();
 	}
 }
