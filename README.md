@@ -29,3 +29,6 @@ Solved exercises:
   * 3. *Hashtabelle mit Buckets*, [ch.hslu.AD.SW04.HashTable.BucketHashSet](src/main/java/ch/hslu/AD/SW04/HashTable/BucketHashSet.java)
   * 4. *Einfache Performance-Messung und Analyse*, [ch.hslu.AD.SW04.HashTable.SimpleHashSetPerf](src/main/java/ch/hslu/AD/SW04/HashTable/SimpleHashSetPerf.java)
   * 5. *Performance-Vergleich: Stack-Implementationen*, [ch.hslu.AD.SW04.HashTable.SimpleStackPerf](src/main/java/ch/hslu/AD/SW04/HashTable/SimpleStackPerf.java)
+* SW 5, [Exercise on ILIAS](https://elearning.hslu.ch/ilias/goto.php?target=file_3328028_download)
+  * 3. *Bankgeschäfte*, [ch.hslu.AD.SW05.BankAccount.Playground](src/main/java/ch/hslu/AD/SW05/BankAccount/Playground.java)
+  * 4. *Das Ende eines Threads*, [ch.hslu.AD.SW05.ThreadAbort.Playground](src/main/java/ch/hslu/AD/SW05/ThreadAbort/Playground.java)
