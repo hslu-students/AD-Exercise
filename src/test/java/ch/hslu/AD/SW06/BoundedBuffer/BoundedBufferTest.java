@@ -232,8 +232,6 @@ public class BoundedBufferTest {
 		buffer.put(21);
 		buffer.put(42);
 		
-		//Boolean wasInterrupted = new Boolean(false);
-		
 		// setup thread with producer
 		Thread p1 = new Thread(() -> {
 			try {
