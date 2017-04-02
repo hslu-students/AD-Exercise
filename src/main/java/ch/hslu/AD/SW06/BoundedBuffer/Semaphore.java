@@ -3,7 +3,7 @@ package ch.hslu.AD.SW06.BoundedBuffer;
 public class Semaphore {
 	private int sema;
 	
-	public Semaphore(int init) {
+	public Semaphore(final int init) {
 		sema = init;
 	}
 	
