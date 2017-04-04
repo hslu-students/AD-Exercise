@@ -33,8 +33,8 @@ public class Turf {
 		starterBox.release();
 		
 		LOG.info("Pruefen ob Startabbruch notwendig ...");
-		if(new Random().nextInt(2) == 0) {
-		//if(true) {
+		//if(new Random().nextInt(2) == 0) {
+		if(false) {
 			LOG.info("Fehlstart - Startabbruch notwendig.");
 			horses.stream().forEach(t -> t.interrupt());
 		}

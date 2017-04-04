@@ -57,6 +57,7 @@ public class Semaphore {
 			throw new IllegalArgumentException("the permits to release and the currently available permits mustn't be greater than the permit limit");
 		}
 		
+		// TODO(TF): counter -> do we have to notify at all?
 		this.notifyAll();
 		this.permits += permits;
 	}

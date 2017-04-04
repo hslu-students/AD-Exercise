@@ -2,7 +2,6 @@ package ch.hslu.AD.SW06.HorseRace;
 
 public class Latch implements Sync {
 	
-	private int ready;
 	private int count;
 	
 	public Latch() {
