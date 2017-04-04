@@ -32,3 +32,8 @@ Solved exercises:
 * SW 5, [Exercise on ILIAS](https://elearning.hslu.ch/ilias/goto.php?target=file_3328028_download)
   * 3. *Bankgeschäfte*, [ch.hslu.AD.SW05.BankAccount.Playground](src/main/java/ch/hslu/AD/SW05/BankAccount/Playground.java)
   * 4. *Das Ende eines Threads*, [ch.hslu.AD.SW05.ThreadAbort.Playground](src/main/java/ch/hslu/AD/SW05/ThreadAbort/Playground.java)
+* SW 6, [Exercise on ILIAS](https://elearning.hslu.ch/ilias/goto.php?target=file_3334458_download)
+  * 1. *Wait-Pool-Demo*, [ch.hslu.AD.SW06.WaitPoolDemo.DemoWaitPool_C](src/main/java/ch/hslu/AD/SW06/WaitPoolDemo/DemoWaitPool_C.java)
+  * 2. *Pferderennen*, [ch.hslu.AD.SW06.HorseRace.Turf](src/main/java/ch/hslu/AD/SW06/HorseRace/Turf.java)
+  * 3. *BoundedBuffer*, [ch.hslu.AD.SW06.BoundedBuffer.BoundedBuffer](src/main/java/ch/hslu/AD/SW06/BoundedBuffer/BoundedBuffer.java)
+  * 4. *Signalgeber*, [ch.hslu.AD.SW06.Semaphore.Semaphore](src/main/java/ch/hslu/AD/SW06/Semaphore/Semaphore.java)
