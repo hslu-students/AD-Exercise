@@ -37,3 +37,7 @@ Solved exercises:
   * 2. *Pferderennen*, [ch.hslu.AD.SW06.HorseRace.Turf](src/main/java/ch/hslu/AD/SW06/HorseRace/Turf.java)
   * 3. *BoundedBuffer*, [ch.hslu.AD.SW06.BoundedBuffer.BoundedBuffer](src/main/java/ch/hslu/AD/SW06/BoundedBuffer/BoundedBuffer.java)
   * 4. *Signalgeber*, [ch.hslu.AD.SW06.Semaphore.Semaphore](src/main/java/ch/hslu/AD/SW06/Semaphore/Semaphore.java)
+* SW 8, [Exercise on ILIAS](https://elearning.hslu.ch/ilias/goto.php?target=file_3347901_download)
+  * 4. *Direktes Einfuegen*, [ch.hslu.AD.SW08.Sort.Sort](src/main/java/ch/hslu/AD/SW08/Sort/Sort.java)
+  * 5. *Direktes Auswaehlen*, [ch.hslu.AD.SW08.Sort.Sort](src/main/java/ch/hslu/AD/SW08/Sort/Sort.java)
+  * 6. *Direktes Austauschen*, [ch.hslu.AD.SW08.Sort.Sort](src/main/java/ch/hslu/AD/SW08/Sort/Sort.java)
