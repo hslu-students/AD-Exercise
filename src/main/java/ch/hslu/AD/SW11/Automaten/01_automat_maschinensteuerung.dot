@@ -1,0 +1,9 @@
+digraph maschinensteuerung {
+    initialized -> running [label="start"];
+    running -> running [label=okay];
+    running -> repair [label=problem];
+    repair -> running [label=okay];
+    repair -> failure [label=problem];
+    running -> failure [label=failure];
+    failure -> initialized [label=reset];
+}
