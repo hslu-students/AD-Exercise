@@ -11,28 +11,7 @@ import re
 
 import colorful
 
-__REGEX__ = '^0(((0(?!0)|(1(11)*(?!1)))+0)|$)$'
-
-
-__REGEX_VERBOSE__ = r'''
-^                    # match from the beginning of the word
-0                    # begins with a zero
-(
-  (
-    (
-      0(?!0)         # match a zero which is not followed by another zero
-      |
-      (1(11)*(?!1))  # match groups of odd ones
-    )
-    +                # repeat to match zero and one groups
-    0                # ensure a trailing zero
-  )
-  |
-  $                  # if no zero or one could be matched the string should end (in case of single zero)
-)
-$                    # match until the end of the word
-'''
-
+__REGEX__ = '^0((11)*10)*$'
 
 __WORDS__ = [
     # valid words
@@ -68,5 +47,4 @@ def main(regex, words):
 
 
 if __name__ == '__main__':
-    # main(__REGEX_VERBOSE__, __WORDS__)
     main(__REGEX__, __WORDS__)
