@@ -2,6 +2,7 @@ digraph garagentorsteuerung {
     ready -> oeffnend [label=befehl_auf];
     ready -> schliessend [label=offenzeit_abgelaufen];
     ready -> stop [label=tuere_offen];
+    ready -> ready [label=tuere_zu];
     stop -> ready [label=tuere_zu];
 
     oeffnend -> oeffnend [label=tuere_zu];
