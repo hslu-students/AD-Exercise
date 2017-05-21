@@ -1,4 +1,4 @@
-# 2 Einfache Suche
+# 1 Einfache Suche
 
 > Die Zeichenkette `aaaaaaaaaaaaaaaaaaaaa...a` mit `n = 100000` soll mit Hilfe einer einfachen Suche nach einem Pattern der Laenge `m = 10` durchsucht werden.
 
